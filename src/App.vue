@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-     app ...
-   <hzq-ztree />
+    <div class="test-ztree">
+      <hzq-ztree treeState="edit" />
+    </div>
   </div>
 </template>
 
@@ -16,5 +17,7 @@ export default {
 </script>
 
 <style>
-
+.test-ztree{
+  width:290px;
+}
 </style>
