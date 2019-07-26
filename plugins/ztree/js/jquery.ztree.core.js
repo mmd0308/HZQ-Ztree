@@ -1317,7 +1317,7 @@
           "'>", name, "</span>" );
           
         if(isParent){
-          html.push("<span style='float:right;' >ff</span>")
+          html.push("<span style='float:right;' ><embed src='../../../src/icons/svg/user.svg' type='image/svg+xml' /></span>")
         }
       },
       makeDOMNodeLine: function (html, setting, node) {

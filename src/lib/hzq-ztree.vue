@@ -7,9 +7,9 @@
         </div>
         <div id="rMenu">
         <ul>
-            <li id="m_add"> <button class="m_button" @onClick="toAdd">添加文档</button></li>
-            <li id="m_edit"> <button class="m_button" @onClick="toEdit">编辑</button></li>
-            <li id="m_del"> <button class="m_button" @onClick="deleted">删除</button></li>
+            <li id="m_add"> <button class="m_button" @click="onRightClickToAdd">添加文档</button></li>
+            <li id="m_edit"> <button class="m_button" @click="onRightClickToEdit">编辑</button></li>
+            <li id="m_del"> <button class="m_button" @click="onRightClickDeleted">删除</button></li>
         </ul>
         </div>
     </div>
@@ -58,6 +58,9 @@ export default {
         treeState:{ 
             type: String,
             default: 'edit'
+        },
+        layerContent:{
+            type: String
         }
     },
     mounted() {
@@ -73,8 +76,13 @@ export default {
                     selectedMulti: false,
                     dblClickExpand: true
                 },
+                edit: {
+                    enable: true,
+                    showRemoveBtn: false,
+                    showRenameBtn: false
+                },
                 callback: {
-                    beforeDrag: this.beforeDragMethod, // 取消拖拽
+                  ///  beforeDrag: this.beforeDragMethod, // 取消拖拽
                     onClick: this.onClickMethod,
                     onRightClick: this.onRightClickMethod
                 }
@@ -86,7 +94,7 @@ export default {
             const zTree_Menu = $.fn.zTree.getZTreeObj('treeContent')
         },
         beforeDragMethod(treeId, treeNodes) {
-            return false
+            return true
         },
         onRightClickMethod(event, treeId, treeNode) {
             if (this.treeState == 'preview') return // 只有进入编辑模式,才能右击操作
@@ -134,18 +142,19 @@ export default {
         cancelRMenu() {
             $('#rMenu').css({ 'visibility': 'hidden' })
         },
-        toAdd(){
-
+        onRightClickToAdd(){
+           this.$emit('onRightClickToAdd');
         },
-        toEdit(){
-
+        onRightClickToEdit(){
+            this.$emit('onRightClickToAdd');
         },
-        deleted(){
-
+        onRightClickDeleted(){
+            this.$emit('onRightClickDeleted');
         }
     }
 }
 </script>
+<!-- <style rel="stylesheet/scss" lang="scss"> -->
 <style>
 .hzq-ztree{
 }

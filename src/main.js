@@ -4,8 +4,11 @@ import hzqztree from './lib/index'
 
 Vue.use(hzqztree)
 
+var Icon = require('vue-awesome')
+Vue.component('icon', Icon)
 
-import './icons/index' // icon
+
+import './icons/index.js' // icon
 
 import $ from './assets/jquery/jquery-vendor.js'
 import '../plugins/ztree/js/jquery.ztree.core.js'

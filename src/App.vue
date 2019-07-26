@@ -1,7 +1,11 @@
 <template>
   <div id="app">
+    <div>
+      标题: <input />
+    </div>
+
     <div class="test-ztree">
-      <hzq-ztree treeState="edit" />
+      <hzq-ztree treeState="edit" @onRightClickToAdd="toAddZtree"/>
     </div>
   </div>
 </template>
@@ -11,6 +15,11 @@ export default {
   name: 'app',
   data () {
     return {
+    }
+  },
+  methods: {
+    toAddZtree(){
+      alert('ll')
     }
   }
 }
