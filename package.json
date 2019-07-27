@@ -1,11 +1,11 @@
 {
-  "name": "hzq-ztree",
+  "name": "hzq-ztree-show",
   "description": "A Vue.js project",
   "version": "0.1.0",
   "author": "hengzhaoqing <hengzhaoqing@163.com>",
   "license": "MIT",
   "private": false,
-  "main": "dist/hzq-ztree.js",
+  "main": "dist/build.js",
   "files": [
     "dist",
     "src"
@@ -15,6 +15,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "hzq-ztree": "^0.1.0",
     "jquery": "^3.4.1",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.11"
