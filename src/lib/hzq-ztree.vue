@@ -21,43 +21,51 @@ export default {
     name: 'hzq-ztree',
     data(){
         return{
-            setting: this.initSetting(),
-            treeData: [
-                {id:1, name:"无右键菜单 1",
-                    children:[
-                        {id:11, name:"节点 1-1"},
-                        {id:12, name:"节点 1-2"}
-                    ]},
-                {id:2, name:"右键操作 2",
-                    children:[
-                        {
-                            id:21, name:"节点 2-1",
-                             children:[
-                                {id:31, name:"节点 3-1"},
-                                {id:32, name:"节点 3-2"},
-                                {id:33, name:"节点 3-3"},
-                                {id:34, name:"节点 3-4"}
-                            ]
-                        },
-                        {id:22, name:"节点 2-2"},
-                        {id:23, name:"节点 2-3"},
-                        {id:24, name:"节点 2-4"}
-                    ]},
-                {id:3, name:"右键操作 3",
-                    children:[
-                        {id:31, name:"节点 3-1"},
-                        {id:32, name:"节点 3-2"},
-                        {id:33, name:"节点 3-3"},
-                        {id:34, name:"节点 3-4"}
-                    ]}
-            ]
+            setting: this.initSetting()
+            // treeData: [
+            //     {id:1, name:"无右键菜单 1",
+            //         children:[
+            //             {id:11, name:"节点 1-1"},
+            //             {id:12, name:"节点 1-2"}
+            //         ]},
+            //     {id:2, name:"右键操作 2",
+            //         children:[
+            //             {
+            //                 id:21, name:"节点 2-1",
+            //                  children:[
+            //                     {id:31, name:"节点 3-1"},
+            //                     {id:32, name:"节点 3-2"},
+            //                     {id:33, name:"节点 3-3"},
+            //                     {id:34, name:"节点 3-4"}
+            //                 ]
+            //             },
+            //             {id:22, name:"节点 2-2"},
+            //             {id:23, name:"节点 2-3"},
+            //             {id:24, name:"节点 2-4"}
+            //         ]},
+            //     {id:3, name:"右键操作 3",
+            //         children:[
+            //             {id:31, name:"节点 3-1",isParent: true},
+            //             {id:32, name:"节点 3-2"},
+            //             {id:33, name:"节点 3-3"},
+            //             {id:34, name:"节点 3-4"}
+            //         ]}
+            // ]
         }
     },
     props: {
+        treeData: {
+           type: Array,
+           required: true
+        },
         // 树的状态  编辑模式:edit  预览模式:preview 默认edit
         treeState:{ 
             type: String,
             default: 'edit'
+        },
+        treeDrag:{ 
+            type: Boolean,
+            default: false
         },
         layerContent:{
             type: String
@@ -74,7 +82,7 @@ export default {
                     // 不显示图标
                     showIcon: false,
                     selectedMulti: false,
-                    dblClickExpand: true
+                    dblClickExpand: false
                 },
                 edit: {
                     enable: true,
@@ -82,8 +90,8 @@ export default {
                     showRenameBtn: false
                 },
                 callback: {
-                  ///  beforeDrag: this.beforeDragMethod, // 取消拖拽
-                    onClick: this.onClickMethod,
+                    beforeDrag: this.beforeDragMethod, // 取消拖拽
+                    onClick: this.onClickNode,
                     onRightClick: this.onRightClickMethod
                 }
             }
@@ -94,7 +102,7 @@ export default {
             const zTree_Menu = $.fn.zTree.getZTreeObj('treeContent')
         },
         beforeDragMethod(treeId, treeNodes) {
-            return true
+            return this.treeDrag
         },
         onRightClickMethod(event, treeId, treeNode) {
             if (this.treeState == 'preview') return // 只有进入编辑模式,才能右击操作
@@ -142,13 +150,26 @@ export default {
         cancelRMenu() {
             $('#rMenu').css({ 'visibility': 'hidden' })
         },
+        onClickNode(e,treeId, treeNode){
+            var zTree = $.fn.zTree.getZTreeObj("treeContent");
+            zTree.expandNode(treeNode);
+            // 修改图标
+            var icon_bottom = 'hzq-tree-right-icon-bottom-' + treeNode.tId;
+            var icon_right = 'hzq-tree-right-icon-right-' + treeNode.tId; 
+            $('#' + icon_bottom ).css('display','block')
+            $('#' + icon_right ).css('display','none')
+            
+        },
         onRightClickToAdd(){
-           this.$emit('onRightClickToAdd');
+            this.cancelRMenu()
+            this.$emit('onRightClickToAdd');
         },
         onRightClickToEdit(){
+            this.cancelRMenu()
             this.$emit('onRightClickToAdd');
         },
         onRightClickDeleted(){
+            this.cancelRMenu()
             this.$emit('onRightClickDeleted');
         }
     }
@@ -194,6 +215,21 @@ export default {
     list-style: none outside none;
     background-color: #fff;
   }
+#rMenu button{
+    display: inline-block;
+    line-height: 22px;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    text-align: center;
+    margin: 0;
+      outline:none;
+}
+#rMenu button:hover{
+    background:  powderblue;
+}
 #rMenu ul .m_button{
     width: 80px;
     border-radius: 0px;

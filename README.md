@@ -3,3 +3,9 @@
 
 - ztree : v3.5.40
 - jquery: ^3.4.1,
+
+
+
+    
+    
+// "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
