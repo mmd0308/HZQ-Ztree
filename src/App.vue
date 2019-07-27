@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <div>
-      标题: <input />
-    </div>
     <div class="test-ztree">
       <hzq-ztree treeState="edit"  :treeData="treeData" @onRightClickToAdd="toAddZtree"/>
     </div>
