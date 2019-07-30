@@ -4,9 +4,9 @@ var webpack = require('webpack')
 module.exports = {
   // 项目入口
   // 采用npm run dev 
-  entry: './src/main.js', 
+  //entry: './src/main.js', 
   // npm install
-  // entry: './src/lib/index.js',
+   entry: './src/lib/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
