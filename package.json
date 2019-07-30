@@ -1,14 +1,15 @@
 {
   "name": "hzq-ztree",
   "description": "A Vue.js project",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "hengzhaoqing <hengzhaoqing@163.com>",
   "license": "MIT",
   "private": false,
   "main": "dist/hzq-ztree.js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "plugins"
   ],
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
