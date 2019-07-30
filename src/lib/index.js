@@ -1,13 +1,13 @@
-import hzqZtree from './hzq-ztree.vue'
+import hzq_ztree from './hzq-ztree.vue'
 
-const hzqztree = {
+const HzqZtree = {
     install(Vue,options){
-        Vue.component(hzqZtree.name,hzqZtree)
+        Vue.component(hzq_ztree.name,hzq_ztree)
     }
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-    window.Vue.use(hzqingTimeLine)
+    window.Vue.use(HzqZtree)
 }
 // 导出
-export default hzqztree 
+export default HzqZtree 
