@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "element-ui": "^2.11.1",
-    "hzq-ztree": "^0.1.1",
+    "hzq-ztree": "^0.1.7",
     "jquery": "^3.4.1",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.11"
