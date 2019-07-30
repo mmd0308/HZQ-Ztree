@@ -1,7 +1,19 @@
 <template>
   <div id="app">
     <div class="test-ztree">
-      <hzq-ztree treeState="edit"  :treeData="treeData" @onRightClickToAdd="toAddZtree"/>
+      <hzq-ztree treeState="edit"  :treeData="treeData" @onRightClickToAdd="toAddZtree" />
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose">
+        <span>这是一段信息</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
+
     </div>
   </div>
 </template>
@@ -39,12 +51,20 @@ export default {
                   {id:33, name:"节点 3-3"},
                   {id:34, name:"节点 3-4"}
               ]}
-      ]
+      ],
+       dialogVisible: false
     }
   },
   methods: {
     toAddZtree(){
-      alert('ll')
+      this.dialogVisible =  true
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
     }
   }
 }
